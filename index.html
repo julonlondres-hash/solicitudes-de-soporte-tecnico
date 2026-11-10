@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitudes de Soporte Técnico</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- PORTADA Y ACCESO -->
+  <main id="portada" class="portada pantalla">
+    <section class="portada-card">
+      <div class="icono-principal">🛠️</div>
+      <p class="etiqueta">CENTRO DE ATENCIÓN INFORMÁTICA</p>
+      <h1>Solicitudes de<br>Soporte Técnico</h1>
+      <p class="intro">Registra, consulta y da seguimiento a los problemas de los equipos del laboratorio.</p>
+      <div class="accesos">
+        <button id="btnInvitado" class="btn btn-secundario">Entrar como invitado</button>
+        <button id="btnMostrarLogin" class="btn btn-principal">Entrar como administrador</button>
+      </div>
+      <form id="login" class="login oculto">
+        <label for="clave">Contraseña de administrador</label>
+        <div class="fila-login">
+          <input id="clave" type="password" placeholder="Escribe la contraseña" required>
+          <button class="btn btn-principal" type="submit">Ingresar</button>
+        </div>
+        <p id="errorLogin" class="mensaje" role="alert"></p>
+      </form>
+      <p class="nota">Proyecto educativo · HTML + CSS + JavaScript + LocalStorage</p>
+    </section>
+  </main>
+
+  <!-- PANEL PRINCIPAL -->
+  <div id="sistema" class="oculto">
+    <header class="header">
+      <div class="identidad">
+        <div class="logo">🛠️</div>
+        <div><strong>Soporte Técnico</strong><span>Gestión de incidencias del laboratorio</span></div>
+      </div>
+      <div class="sesion">
+        <span id="rol" class="rol">Modo invitado</span>
+        <button id="btnSalir" class="btn btn-salir">cerrar sesion</button>
+      </div>
+    </header>
+
+    <main class="contenido">
+      <section class="resumen">
+        <div>
+          <p class="etiqueta">PANEL DE CONTROL</p>
+          <h2>Solicitudes de soporte</h2>
+          <p>Controla los problemas reportados en los equipos del laboratorio.</p>
+        </div>
+        <div class="estadisticas">
+          <article class="stat"><span>Total</span><strong id="total">0</strong></article>
+          <article class="stat pendiente"><span>Pendientes</span><strong id="pendientes">0</strong></article>
+          <article class="stat resuelto"><span>Resueltas</span><strong id="resueltas">0</strong></article>
+        </div>
+      </section>
+
+      <section id="panelFormulario" class="panel">
+        <div class="titulo-panel">
+          <div><span class="numero">01</span><h3 id="tituloForm">Registrar solicitud</h3></div>
+          <span class="ayuda">Describe el problema del equipo</span>
+        </div>
+        <form id="formSolicitud">
+          <input type="hidden" id="indiceEdicion">
+          <div class="form-grid">
+            <div class="campo">
+              <label for="equipo">Nombre o identificación del equipo *</label>
+              <input id="equipo" maxlength="70" placeholder="Ej. Computadora PC-05" required>
+            </div>
+            <div class="campo">
+              <label for="reportado">Persona que reporta *</label>
+              <input id="reportado" maxlength="70" placeholder="Nombre del estudiante o docente" required>
+            </div>
+            <div class="campo">
+              <label for="fecha">Fecha del reporte *</label>
+              <input id="fecha" type="date" required>
+            </div>
+            <div class="campo ancho">
+              <label for="descripcion">Descripción del problema *</label>
+              <textarea id="descripcion" rows="3" maxlength="500" placeholder="Explica qué sucede con el equipo..." required></textarea>
+            </div>
+          </div>
+          <div class="acciones">
+            <button id="btnGuardar" class="btn btn-principal" type="submit">Registrar solicitud</button>
+            <button id="btnLimpiar" class="btn btn-claro" type="button">Limpiar formulario</button>
+            <button id="btnCancelar" class="btn btn-claro oculto" type="button">Cancelar edición</button>
+          </div>
+          <p id="mensajeForm" class="mensaje" role="status"></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="titulo-panel titulo-lista">
+          <div><span class="numero">02</span><h3>Solicitudes registradas</h3></div>
+          <div class="herramientas">
+            <input id="buscar" class="buscador" type="search" placeholder="Buscar por equipo o problema...">
+            <select id="filtroEstado" class="filtro" aria-label="Filtrar por estado">
+              <option value="">Todos los estados</option>
+              <option value="Pendiente">Pendientes</option>
+              <option value="Resuelto">Resueltas</option>
+            </select>
+            <button id="btnImprimir" class="btn btn-claro" type="button">Imprimir</button>
+          </div>
+        </div>
+        <div class="tabla-wrap">
+          <table>
+            <thead><tr>
+              <th>N.º</th><th>Equipo</th><th>Reportado por</th><th>Fecha</th><th>Descripción del problema</th><th>Estado</th><th class="acciones-col">Acciones</th>
+            </tr></thead>
+            <tbody id="tabla"></tbody>
+          </table>
+          <div id="vacio" class="vacio">Todavía no hay solicitudes registradas.</div>
+        </div>
+        <p id="contador" class="contador">Mostrando 0 solicitudes</p>
+      </section>
+      <footer>Los registros se guardan en este navegador mediante LocalStorage.</footer>
+    </main>
+  </div>
+</body>
+</html>
